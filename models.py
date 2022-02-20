@@ -84,6 +84,7 @@ class Tweet(BaseModel):
     twitter_user = ForeignKeyField(TwitterUser, related_name='tweets')
     photo_url = TextField(default='')
     video_url = TextField(default='')
+    is_reply = BooleanField(default=False)
 
     @property
     def screen_name(self):
@@ -104,6 +105,7 @@ migrator = SqliteMigrator(db)
 operations = [
     migrator.add_column('tweet', 'photo_url', Tweet.photo_url),
     migrator.add_column('tweet', 'video_url', Tweet.video_url),
+    migrator.add_column('tweet', 'is_reply', Tweet.is_reply),
     migrator.add_column('twitteruser', 'last_fetched', TwitterUser.last_fetched),
     migrator.add_column('telegramchat', 'twitter_request_token',
                         TelegramChat.twitter_request_token),

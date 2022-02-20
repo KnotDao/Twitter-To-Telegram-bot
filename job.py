@@ -80,6 +80,7 @@ def FetchAndSendTweetsJob(context_in: CallbackContext) -> None:
             job.logger.debug("- Got tweet: {}".format(tweet.full_text))
 
             # Check if tweet contains media, else check if it contains a link to an image
+            is_reply = tweet.in_reply_to_status_id != None
             extensions = ('.jpg', '.jpeg', '.png', '.gif')
             pattern = '[(%s)]$' % ')('.join(extensions)
             photo_url = []
@@ -113,7 +114,7 @@ def FetchAndSendTweetsJob(context_in: CallbackContext) -> None:
                 indices = url_entity['indices']
                 display_url = tweet.full_text[indices[0]:indices[1]]
                 tweet_text = tweet_text.replace(display_url, expanded_url)
-
+            
             tw_data = {
                 'tw_id': tweet.id,
                 'text': tweet_text,
@@ -121,6 +122,7 @@ def FetchAndSendTweetsJob(context_in: CallbackContext) -> None:
                 'twitter_user': tw_user,
                 'photo_url': photo_url,
                 'video_url': video_url,
+                'is_reply': is_reply,
             }
             try:
                 t = Tweet.get(Tweet.tw_id == tweet.id)

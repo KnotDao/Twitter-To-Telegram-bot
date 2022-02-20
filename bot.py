@@ -37,6 +37,9 @@ class TwitterForwarderBot(Bot):
                 if len(eval(tweet.photo_url)) == 0:
                     return
 
+            if (tweet.is_reply):
+                return
+
             self.logger.debug("Sending tweet {} to chat {}...".format(
                 tweet.tw_id, chat.chat_id
             ))
