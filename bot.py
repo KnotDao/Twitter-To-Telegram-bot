@@ -62,13 +62,18 @@ class TwitterForwarderBot(Bot):
                 tz = timezone(chat.timezone_name)
                 created_dt = created_dt.astimezone(tz)
             created_at = created_dt.strftime('%Y-%m-%d %H:%M:%S %Z')
+# *{name}* ([@{screen_name}](https://twitter.com/{screen_name})) at {created_at}:
+# {text}
+# -- [Link to this Tweet](https://twitter.com/{screen_name}/status/{tw_id})
             self.sendMessage(
                 chat_id=chat.chat_id,
                 disable_web_page_preview=not photo_url,
                 text="""
-*{name}* ([@{screen_name}](https://twitter.com/{screen_name})) at {created_at}:
+Tweet from *KnotDao* ([@{screen_name}](https://twitter.com/{screen_name})):
 {text}
--- [Link to this Tweet](https://twitter.com/{screen_name}/status/{tw_id})
+
+[Link to this Tweet](https://twitter.com/{screen_name}/status/{tw_id})
+
 """
                 .format(
                     text=prepare_tweet_text(tweet.text),
