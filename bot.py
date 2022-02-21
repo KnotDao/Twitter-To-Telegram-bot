@@ -64,9 +64,9 @@ class TwitterForwarderBot(Bot):
             created_at = created_dt.strftime('%Y-%m-%d %H:%M:%S %Z')
             self.sendMessage(
                 chat_id=chat.chat_id,
-                disable_web_page_preview=not photo_url,
+                disable_web_page_preview=False,
                 text="""
-Tweet from *KnotDao* ([@{screen_name}](https://twitter.com/{screen_name})):
+Tweet from *{name}* ([@{screen_name}](https://twitter.com/{screen_name})):
 
 {text}
 
