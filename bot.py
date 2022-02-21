@@ -70,7 +70,7 @@ Tweet from *KnotDao* ([@{screen_name}](https://twitter.com/{screen_name})):
 
 {text}
 
-[permalink](https://twitter.com/{screen_name}/status/{tw_id})
+https://twitter.com/{screen_name}/status/{tw_id}
 
 """
                 .format(
